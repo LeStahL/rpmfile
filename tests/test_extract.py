@@ -61,6 +61,7 @@ class TempDirTest(unittest.TestCase):
         "sudo.rpm",
     )
     def test_lzma_sudo(self, rpmpath):
+        self.assertTrue(rpmfile.is_rpmfile(rpmpath))
         with rpmfile.open(rpmpath) as rpm:
             # Inspect the RPM headers
             self.assertIn("name", rpm.headers.keys())
@@ -81,6 +82,7 @@ class TempDirTest(unittest.TestCase):
         "xmlstarlet.rpm",
     )
     def test_zstd_xmlstarlet(self, rpmpath):
+        self.assertTrue(rpmfile.open(rpmpath))
         with rpmfile.open(rpmpath) as rpm:
             # Inspect the RPM headers
             self.assertIn("name", rpm.headers.keys())

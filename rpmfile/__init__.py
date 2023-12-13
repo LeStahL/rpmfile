@@ -210,6 +210,22 @@ def open(name=None, mode="rb", fileobj=None):
     """
     return RPMFile(name, mode, fileobj)
 
+def is_rpmfile(name=None):
+    """Return True if name points to a rpm archive that we
+       are able to handle, else return False.
+
+       'name' should be a string, file, or file-like object.
+    """
+    try:
+        if hasattr(name, "read"):
+            pos = name.tell()
+            open(fileobj=name)
+            name.seek(pos)
+        else:
+            open(name)
+        return True
+    except:
+        return False
 
 def main():
     print(sys.argv[1])
